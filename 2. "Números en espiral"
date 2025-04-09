@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n,arriba,abajo,izq,der; 
+    cin>>n;// Tamaño del cuadrado
+    int matriz[n][n];
+    int valor = 1;
+
+    // límites para el recorrido en espiral
+     arriba= 0, abajo = n - 1;
+       der = 0, izq = n - 1;
+
+    // Llenado de la matriz en espiral
+    while (arriba <= abajo && der <= izq) {
+        //  fila superior
+        for (int i = der; i <= izq; i++) {
+            matriz[arriba][i] = valor++;
+        }
+        arriba++;
+
+        // columna derecha
+        for (int i = arriba; i <= abajo; i++) {
+            matriz[i][izq] = valor++;
+        }
+        izq--;
+
+        // fila inferior
+        if (arriba <= abajo) {
+            for (int i = izq; i >= der; i--) {
+                matriz[abajo][i] = valor++;
+            }
+            abajo--;
+        }
+
+        // columna izquierda
+        if (der <= izq) {
+            for (int i = abajo; i >= arriba; i--) {
+                matriz[i][der] = valor++;
+            }
+            der++;
+        }
+    }
+
+    // imprimir la matriz
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << matriz[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
